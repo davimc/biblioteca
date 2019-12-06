@@ -1,6 +1,18 @@
 package domain;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
 public class Livro {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @OneToMany(mappedBy = "livro")
+    List<Emprestimo> emprestimos = new ArrayList<>();
+
     private String autor;
     private String titulo;
     private boolean isEmprestado;
@@ -11,6 +23,10 @@ public class Livro {
         this.titulo = titulo;
         this.isEmprestado = false;
         this.isReservado = false;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getAutor() {
@@ -45,6 +61,14 @@ public class Livro {
         isReservado = reservado;
     }
 
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,7 +79,7 @@ public class Livro {
     }
 
 
-    //others
+    //
     public void emprestar(){
         this.setEmprestado(true);
     }
