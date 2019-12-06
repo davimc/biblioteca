@@ -1,8 +1,8 @@
-package service;
+package services;
 
-import domain.Emprestimo;
-import domain.Livro;
-import domain.Usuario;
+import domains.Emprestimo;
+import domains.Livro;
+import domains.Cliente;
 
 import java.time.LocalDate;
 
@@ -22,7 +22,7 @@ public class EmprestimoService {
         historico = historico;
     }
 
-    public LocalDate emprestaLivro(Livro livro, Usuario usuario){
+    public LocalDate emprestaLivro(Livro livro, Cliente cliente){
         Emprestimo emp = new Emprestimo();
 
 
@@ -33,12 +33,12 @@ public class EmprestimoService {
          *   Se o período de devolução for depois da reserva
          *   Se o usuário já chegou no limite de livros*/
         if(!livro.isEmprestado() && !livro.isReservado()) {
-            if(this.usuario.alugaLivro(livro,usuario)) {
+            if(this.usuario.alugaLivro(livro, cliente)) {
                 emp.setDataEmprestimo(LocalDate.now());
                 emp.setDataPrevista(LocalDate.now().plusDays(7));
                 emp.setLivro(livro);
                 emp.setStatus(true);
-                emp.setusuario(usuario);
+                emp.setusuario(cliente);
                 historico.add(emp);
                 return emp.getDataPrevista();
             }
@@ -46,14 +46,14 @@ public class EmprestimoService {
         }
         throw new IllegalArgumentException("Livro não está dispnível");
     }
-    public LocalDate emprestaLivro(Livro livro, Usuario usuario, LocalDate dataEmprestimo) {
+    public LocalDate emprestaLivro(Livro livro, Cliente cliente, LocalDate dataEmprestimo) {
         Emprestimo emp = new Emprestimo();
         if(!livro.isEmprestado() && !livro.isReservado()) {
-            if(this.usuario.alugaLivro(livro,usuario)) {
+            if(this.usuario.alugaLivro(livro, cliente)) {
                 emp.setDataEmprestimo(dataEmprestimo);
                 emp.setDataPrevista(dataEmprestimo.plusDays(7));
                 emp.setLivro(livro);
-                emp.setusuario(usuario);
+                emp.setusuario(cliente);
                 emp.setStatus(true);
                 historico.add(emp);
                 return emp.getDataPrevista();

@@ -1,12 +1,11 @@
-package domain;
+package domains;
 
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+
 @Entity
 public class Emprestimo {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -20,7 +19,7 @@ public class Emprestimo {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="USUARIO_ID")
-    private Usuario usuario;
+    private Cliente cliente;
 
     private LocalDate dataEmprestimo ;
     private LocalDate dataPrevista ;
@@ -34,23 +33,14 @@ public class Emprestimo {
         dataReserva = LocalDate.MAX;
     }
 
-    /*public Emprestimo(Usuario usuario, LocalDate dataEmprestimo, LocalDate dataPrevista, LocalDate dataDevolucao, Livro livro) {
-        this.usuario = usuario;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataPrevista = dataPrevista;
-        this.dataDevolucao = dataDevolucao;
-        this.livro = livro;
-        this.valor = VALOR_ALUGUEL;
-    }*/
-
     //GETTERS E SETTERS
 
-    public Usuario getusuario() {
-        return usuario;
+    public Cliente getusuario() {
+        return cliente;
     }
 
-    public void setusuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setusuario(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public LocalDate getDataEmprestimo() {
@@ -85,12 +75,12 @@ public class Emprestimo {
         this.livro = livro;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public LocalDate getDataReserva() {
@@ -115,14 +105,15 @@ public class Emprestimo {
     public void iniciaEmprestimo(){
         setStatus(false);
     }
-    public double finalizaEmprestimo(){
-        if(statusEmprestimo())
-        setDataDevolucao(LocalDate.now());
-        setStatus(true);
+    public double finalizaEmprestimo() {
+        if (!statusEmprestimo()) {
+            setDataDevolucao(LocalDate.now());
+            setStatus(true);
+        }
         /*PERGUNTAR PARA JOÃO SE ESSE THIS É UM PRÁTICA RUIM
-        ***
-        *****
-         */
+             ***
+             *****
+             */
         return pagamento.calculaValor();
     }
     public boolean statusEmprestimo(){
