@@ -5,9 +5,9 @@ import java.time.temporal.ChronoUnit;
 
 @Entity
 public class Pagamento {
-    private final double VALOR_ALUGUEL = 5.0;
-    private final double VALOR_DIARIO_MULTA = 0.4;
-    private final double LIMITE_MULTA_APLICAVEL = 0.6;
+    private final static double VALOR_ALUGUEL = 5.0;
+    private final static double VALOR_DIARIO_MULTA = 0.4;
+    private final static double LIMITE_MULTA_APLICAVEL = 0.6;
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -38,6 +38,14 @@ public class Pagamento {
         this.valor = valor;
     }
 
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+
+    public void setEmprestimo(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
+    }
+
     public double getVALOR_ALUGUEL() {
         return VALOR_ALUGUEL;
     }
@@ -56,7 +64,7 @@ public class Pagamento {
             return this.getVALOR_ALUGUEL();
         else{
             double valor = this.getVALOR_ALUGUEL() + (ChronoUnit.DAYS.between(emprestimo.getDataPrevista(), emprestimo.getDataDevolucao()))*getVALOR_DIARIO_MULTA();
-            return valor>calculaLimiteDeMulta()?calculaLimiteDeMulta():valor;
+            return Math.min(valor, calculaLimiteDeMulta());
         }
     }
     private double calculaLimiteDeMulta(){
