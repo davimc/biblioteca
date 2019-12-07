@@ -1,10 +1,9 @@
-import domain.Emprestimo;
-import domain.Livro;
-import domain.Usuario;
+import domains.Livro;
+import domains.Cliente;
 import org.junit.Assert;
 import org.junit.Test;
-import service.EmprestimoService;
-import service.UsuarioService;
+import services.EmprestimoService;
+import services.UsuarioService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,9 +15,9 @@ public class EmprestimoTest {
     private Livro l3 = new Livro("Autor C", "Livro 3");
     private Livro l4 = new Livro("Autor A", "Livro 4");
 
-    private Usuario u1 = new Usuario("Davi", "5298");
-    private Usuario u2 = new Usuario("Carol", "8525");
-    private Usuario u3 = new Usuario("Jenifer", "1303");
+    private Cliente u1 = new Cliente("Davi", "5298");
+    private Cliente u2 = new Cliente("Carol", "8525");
+    private Cliente u3 = new Cliente("Jenifer", "1303");
 
     @Test
     public void testaEmprestimoLivroSemReserva() {

@@ -1,17 +1,16 @@
-package domain;
+package domains;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Cliente {
     private final Integer LIMITE_listaLivros= 2;
 
     private String nome;
     private String matricula;
     private List<Livro> listaLivros;
 
-    public Usuario(String nome, String matricula) {
+    public Cliente(String nome, String matricula) {
         this.nome = nome;
         this.matricula = matricula;
         listaLivros = new ArrayList();
