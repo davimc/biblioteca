@@ -1,56 +1,56 @@
 package repositories;
 
-import domains.Emprestimo;
-import repositories.interfaces.iEmprestimoDAO;
+import domains.Pagamento;
+import repositories.interfaces.iPagamentoDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.List;
 
-public class EmprestimoRepository implements iEmprestimoDAO , Serializable {
+public class PagamentoRepository implements iPagamentoDAO , Serializable {
     private static final long serialVersionUID = 1L;
     private EntityManager em;
 
-    public EmprestimoRepository(EntityManager em) {
+    public PagamentoRepository(EntityManager em) {
         this.em = em;
     }
 
     @Override
-    public void salva(Emprestimo emprestimo) {
+    public void salva(Pagamento pagamento) {
         em.getTransaction().begin();
-        em.merge(emprestimo);
+        em.merge(pagamento);
         em.getTransaction().commit();
     }
 
     @Override
-    public void atualiza(Emprestimo emprestimo) {
+    public void atualiza(Pagamento pagamento) {
         em.getTransaction().begin();
-        em.merge(emprestimo);
+        em.merge(pagamento);
         em.getTransaction().commit();
     }
 
     @Override
-    public Emprestimo buscaPor(Integer id) {
-        Query query = em.createQuery("SELECT c FROM EMPRESTIMO WHERE id=:id");
+    public Pagamento buscaPor(Integer id) {
+        Query query = em.createQuery("SELECT p FROM PAGAMENTO WHERE id=:id");
         query.setParameter("id", id);
         try {
-            return (Emprestimo) query.getSingleResult();
+            return (Pagamento) query.getSingleResult();
         }catch (Exception e){
             e.getStackTrace();
             return null;
+
         }
     }
 
     @Override
-    public List<Emprestimo> buscaTodos() {
-        Query query = em.createQuery("SELECT c FROM EMPRESTIMO");
+    public List<Pagamento> buscaTodos() {
+        Query query = em.createQuery("SELECT p FROM PAGAMENTO");
         try {
-            return (List<Emprestimo>) query.getResultList();
+            return (List<Pagamento>) query.getResultList();
         }catch (Exception e){
             e.getStackTrace();
             return null;
         }
     }
-
 }

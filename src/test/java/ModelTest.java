@@ -8,7 +8,7 @@ import services.UsuarioService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class EmprestimoTest {
+public class ModelTest {
 
     private Livro l1 = new Livro("Autor A", "Livro 1");
     private Livro l2 = new Livro("Autor B", "Livro 2");

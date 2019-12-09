@@ -5,9 +5,11 @@ import repositories.interfaces.iLivroDAO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.io.Serializable;
 import java.util.List;
 
-public class LivroRepository implements iLivroDAO {
+
+public class LivroRepository implements iLivroDAO{
     private EntityManager em;
 
     public LivroRepository(EntityManager em) {
@@ -15,10 +17,11 @@ public class LivroRepository implements iLivroDAO {
     }
 
     @Override
-    public void salva(Livro livro) {
+    public boolean salva(Livro livro) {
         em.getTransaction().begin();
         em.merge(livro);
         em.getTransaction().commit();
+        return true;
     }
 
     @Override

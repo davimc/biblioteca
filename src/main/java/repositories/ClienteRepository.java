@@ -3,13 +3,14 @@ package repositories;
 import domains.Cliente;
 import repositories.interfaces.iClienteDAO;
 
-import javax.management.modelmbean.InvalidTargetObjectTypeException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import java.io.Serializable;
 import java.util.List;
 
-public class ClienteRepository implements iClienteDAO {
+public class ClienteRepository implements iClienteDAO, Serializable {
+    private static final long serialVersionUID = 1L;
     private EntityManager em;
 
     public ClienteRepository(EntityManager em) {

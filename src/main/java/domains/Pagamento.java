@@ -1,10 +1,13 @@
 package domains;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.temporal.ChronoUnit;
 
 @Entity
-public class Pagamento {
+public class Pagamento implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final static double VALOR_ALUGUEL = 5.0;
     private final static double VALOR_DIARIO_MULTA = 0.4;
     private final static double LIMITE_MULTA_APLICAVEL = 0.6;

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface iLivroDAO {
 
-    public void salva(Livro livro);
+    public boolean salva(Livro livro);
 
     public void atualiza(Livro livro);
 
