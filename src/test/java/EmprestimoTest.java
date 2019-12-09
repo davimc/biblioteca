@@ -25,14 +25,15 @@ public class EmprestimoTest {
         EmprestimoService em = new EmprestimoService();
 
 
-        Assert.assertEquals(true, em.emprestaLivro(l1, u2, LocalDate.now()));
+        Assert.assertEquals(LocalDate.now().plusDays(7), em.emprestaLivro(l1, u2, LocalDate.now()));
     }
-    @Test
+   /* @Test(expected = )
     public void testaEmprestimoLivroComReserva(){
         EmprestimoService ems = new EmprestimoService();
         l3.setReservado(true);
-        Assert.assertEquals(false, ems.emprestaLivro(l3,u2, LocalDate.now()));
-    }
+        Assert.(ems.emprestaLivr
+    (l3,u2, LocalDate.now()));
+    }*/
     @Test
     public void testaUsuarioNenhumEmprestimo(){
         EmprestimoService ems = new EmprestimoService();
