@@ -50,5 +50,5 @@ public class EmprestimoRepository implements iEmprestimoDAO {
             return null;
         }
     }
-    
+
 }
